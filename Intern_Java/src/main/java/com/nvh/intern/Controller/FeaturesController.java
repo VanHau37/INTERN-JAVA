@@ -1,4 +1,4 @@
-package com.nvh.intern.controller;
+package com.nvh.intern.Controller;
 
 import javax.validation.Valid;
 
