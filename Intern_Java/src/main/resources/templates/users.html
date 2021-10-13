@@ -46,7 +46,7 @@
 					<td th:text="${user.phone}">Phone</td>
 					<td th:text="${user.address}">Address</td>
 					<td>
-						<img th:src="@{${user.imagesPath}}" width="20px" height="20px">
+						<img th:src="@{${user.imagesPath}}" width="40px" height="40px">
 					</td>
 					<td class="text-center"><a th:href="@{/edit/{id}(id=${user.id})}"
 						class="btn btn-primary"> <i class="fas fa-edit"></i>

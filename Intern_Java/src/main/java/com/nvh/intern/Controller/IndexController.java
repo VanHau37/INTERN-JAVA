@@ -9,6 +9,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,24 +27,25 @@ import com.nvh.intern.Repository.UserRepository;
 
 import net.coobird.thumbnailator.Thumbnails;
 
-
 @Controller
 public class IndexController {
-//private static final Path CURRENT_FOLDER = Paths.get(System.getProperty("user.dir"));
 	@Autowired
 	private UserRepository repo;
 
+	// index
 	@GetMapping("/")
 	public String viewHomePage() {
 		return "index";
 	}
 
+	// get sign-up
 	@GetMapping("/register")
 	public String showSignUpForm(Model model) {
 		model.addAttribute("user", new User());
 		return "signup_form";
 	}
 
+	// post sign-up
 	@PostMapping("/process_register")
 	public String processRegistration(@Valid User user, Errors er,
 			@RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
@@ -58,16 +60,15 @@ public class IndexController {
 
 			user.setPassword(encodePassword);
 			User savedUser = repo.save(user);
-			String uploadDir = "./images/" + savedUser.getId();
+			String uploadDir = "/images/" + savedUser.getId();
 			Path uploadPath = Paths.get(uploadDir);
 			if (!Files.exists(uploadPath)) {
 				Files.createDirectories(uploadPath);
 			}
-			try (InputStream inputStream = multipartFile.getInputStream()) {
-				Thumbnails.of(fileName).size(512, 512).toFile(uploadDir);
-				Path filePath = uploadPath.resolve(fileName);
-				System.out.println(filePath.toFile().getAbsolutePath());
-				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+			try (InputStream inputStream = multipartFile.getInputStream()) {				
+					Path filePath = uploadPath.resolve(fileName);
+					System.out.println(filePath.toFile().getAbsolutePath());
+					Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);				
 			} catch (IOException e) {
 				throw new IOException("could not save uploaded file:" + fileName);
 			}
@@ -75,6 +76,7 @@ public class IndexController {
 		return "register_success";
 	}
 
+	// list users
 	@GetMapping("/list_users")
 	public String viewUsersList(Model model) {
 		List<User> listUsers = repo.findAll();

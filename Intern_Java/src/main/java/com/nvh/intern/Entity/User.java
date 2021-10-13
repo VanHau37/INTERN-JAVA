@@ -27,15 +27,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
-	
 	@NotEmpty(message="Không được để trống")
 	@Size(min = 8, message="Mã, bạn phải nhập ít nhất 8 kí tự")
 	@Column(nullable = false, length = 64)
-	 @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",message="Vui lòng nhập mã của bạn chứa đầy đủ các thành phần: chữ cái,chữ hoa, chữ số và kí tự đặt biệt")  
+	 @Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",message="Vui lòng nhập mã của bạn chứa đầy đủ các thành phần: chữ cái,chữ hoa và chữ số")  
 	private String id_users;
 	
-	
+
 	@NotEmpty(message="Không được để trống")
 	@Size(min = 8, message="Mật khẩu phải có ít nhất 8 kí tự")
 	@Column(nullable = false, length = 64)
@@ -71,16 +69,13 @@ public class User {
 	@Column(nullable = false, length = 64)
 	private String address;
 	
-	
-	
-
 	@Column(nullable = false, length = 40)
 	private String emoji;
 	
-	
+	//Get image
 	@Transient
 	public String getImagesPath() {
 		if(emoji == null|| id==null) return null;
-		return "/images/"+ id + "/"+ emoji;
+		return "images/"+ id + "/"+ emoji;
 	}
 }
