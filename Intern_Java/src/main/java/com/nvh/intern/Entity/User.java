@@ -30,14 +30,14 @@ public class User {
 	@NotEmpty(message="Không được để trống")
 	@Size(min = 8, message="Mã, bạn phải nhập ít nhất 8 kí tự")
 	@Column(nullable = false, length = 64)
-	 @Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",message="Vui lòng nhập mã của bạn chứa đầy đủ các thành phần: chữ cái,chữ hoa và chữ số")  
+	 @Pattern(regexp="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$",message="Vui lòng nhập mã của bạn chứa đầy đủ các thành phần: chữ cái viết thường,chữ hoa và chữ số")  
 	private String id_users;
 	
 
 	@NotEmpty(message="Không được để trống")
 	@Size(min = 8, message="Mật khẩu phải có ít nhất 8 kí tự")
 	@Column(nullable = false, length = 64)
-    @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",message="Vui lòng nhập mật khẩu có đầy đủ các thành phần: chữ cái,chữ hoa, chữ số và kí tự đặt biệt")  
+    @Pattern(regexp="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$",message="Vui lòng nhập mật khẩu có đầy đủ các thành phần: chữ cái viết thường,chữ hoa, chữ số và kí tự đặt biệt")  
 	private String password;
 	
 	@NotEmpty(message="Không được để trống")
@@ -59,7 +59,7 @@ public class User {
 	
 	
 	@NotEmpty(message="Không được để trống")
-	@Pattern(regexp="\\d+", message="Mã zip không có chữ cái nào!")
+	@Pattern(regexp="\\d+", message="Mã zip là 1 chuỗi số!")
 	@Column(nullable = false, length = 6)
 	private String id_zip;
 	
@@ -69,6 +69,7 @@ public class User {
 	@Column(nullable = false, length = 64)
 	private String address;
 	
+	
 	@Column(nullable = false, length = 40)
 	private String emoji;
 	
@@ -76,6 +77,6 @@ public class User {
 	@Transient
 	public String getImagesPath() {
 		if(emoji == null|| id==null) return null;
-		return "images/"+ id + "/"+ emoji;
+		return "./images/"+ id + "/"+ emoji;
 	}
 }

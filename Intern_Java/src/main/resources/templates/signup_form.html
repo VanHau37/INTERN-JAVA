@@ -44,7 +44,7 @@
 					<div class="form-group row">
 						<label class="col-form-label col-4" for="password">Password</label>
 						<div class="col-8">
-							<input type="password" class="form-control"
+							<input type="text" class="form-control"
 								th:field="*{password}" /> <br />
 							<p th:if="${#fields.hasErrors('password')}"
 								th:errors="*{password}" class="alert alert-danger"></p>
@@ -94,15 +94,14 @@
 						<label class="col-form-label col-4" for="emoji">Emoji</label>
 						<div class="col-8">
 							<div class="row">
-								<div class="col-5" >
-									<input type="file" size="30px" name="fileImage" id="fileImage" 
-										accept="image/png, image/jpeg" />
+								<div class="col-5">
+									<input type="file" name="fileImage" id="fileImage" 
+										accept="image/png, image/jpeg, image/jpg, image/bmp" required />
 								</div>
 								<div class="col-3">
-									<img id="thumbail" alt="Preview" />
+									<img id="thumbail" src="images/search.jpg" width="70px" height="50px" alt="Preview" />
 								</div>
-							</div>
-
+							</div>						
 						</div>
 					</div>
 					<div>

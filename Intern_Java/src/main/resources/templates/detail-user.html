@@ -90,7 +90,7 @@
 					<div class="form-group row">
 						<label class="col-form-label col-4" for="emoji">Emoji </label>
 						<div class="col-8">
-							<input type="text" class="form-control" th:field="*{emoji}" /> <br />
+							<input type="text" class="form-control" th:field="*{emoji}" readonly/> <br />
 							<p th:if="${#fields.hasErrors('emoji')}" th:errors="*{emoji}"
 								class="alert alert-danger"></p>
 						</div>

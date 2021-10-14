@@ -9,7 +9,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,8 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.nvh.intern.Entity.User;
 import com.nvh.intern.Repository.UserRepository;
-
-import net.coobird.thumbnailator.Thumbnails;
 
 @Controller
 public class IndexController {
@@ -60,7 +57,7 @@ public class IndexController {
 
 			user.setPassword(encodePassword);
 			User savedUser = repo.save(user);
-			String uploadDir = "/images/" + savedUser.getId();
+			String uploadDir = "src/main/resources/static/images/" + savedUser.getId();
 			Path uploadPath = Paths.get(uploadDir);
 			if (!Files.exists(uploadPath)) {
 				Files.createDirectories(uploadPath);
